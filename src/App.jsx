@@ -6,19 +6,15 @@ import CardSwapComp from "./components/CardSwapcom";
 import { useNavigate } from "react-router-dom";
 import Footer from "./components/Footer";
 
-
-
-
-
 const App = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative w-full min-h-screen bg-black overflow-hidden z-0">
-       <div className="fixed top-0 left-0 right-0 flex justify-center z-20">
+    <div className="relative w-full min-h-screen bg-black overflow-hidden">
+      <div className="fixed top-0 left-0 right-0 flex justify-center z-20">
         <PillNav
           logo={logo}
-          logoAlt="Omar's Logo"
+          logoAlt="Company Logo"
           items={[
             { label: "Home", targetId: "home" },
             { label: "About", targetId: "about" },
@@ -32,8 +28,7 @@ const App = () => {
           pillTextColor="#000000"
         />
       </div>
-      
-      
+
       <div id="home">
         <Hero />
       </div>
@@ -41,13 +36,12 @@ const App = () => {
       <div id="about">
         <CardSwapComp />
       </div>
-        
-        <div id="contact" className="my-25">
-          <Footer />
-        </div>
+
+      <div id="contact" className="my-25">
+        <Footer />
+      </div>
     </div>
   );
 };
 
 export default App;
-
