@@ -8,28 +8,30 @@ import React, {
   useRef,
 } from "react";
 import gsap from "gsap";
-import "./css/CardSwap.css";
 
-export const Card = forwardRef(({ customClass, children, ...rest }, ref) => (
-  <div
-    ref={ref}
-    {...rest}
-    className={`card bg-white text-black rounded-xl shadow-lg p-6 flex flex-col items-center justify-center ${
-      customClass ?? ""
-    } ${rest.className ?? ""}`.trim()}
-  >
-    {children}
-  </div>
-));
-
+export const Card = forwardRef(
+  ({ customClass, ...rest }, ref) => (
+    <div
+      ref={ref}
+      {...rest}
+      className={`absolute top-1/2 left-1/2 rounded-xl border border-white bg-black [transform-style:preserve-3d] [will-change:transform] [backface-visibility:hidden] ${customClass ?? ""} ${rest.className ?? ""}`.trim()}
+    />
+  )
+);
 Card.displayName = "Card";
 
-const makeSlot = (i, distX, distY, total) => ({
+const makeSlot = (
+  i,
+  distX,
+  distY,
+  total
+) => ({
   x: i * distX,
   y: -i * distY,
   z: -i * distX * 1.5,
   zIndex: total - i,
 });
+
 const placeNow = (el, slot, skew) =>
   gsap.set(el, {
     x: slot.x,
@@ -58,30 +60,35 @@ const CardSwap = ({
   const config =
     easing === "elastic"
       ? {
-          ease: "elastic.out(0.6,0.9)",
-          durDrop: 2,
-          durMove: 2,
-          durReturn: 2,
-          promoteOverlap: 0.9,
-          returnDelay: 0.05,
-        }
+        ease: "elastic.out(0.6,0.9)",
+        durDrop: 2,
+        durMove: 2,
+        durReturn: 2,
+        promoteOverlap: 0.9,
+        returnDelay: 0.05,
+      }
       : {
-          ease: "power1.inOut",
-          durDrop: 0.8,
-          durMove: 0.8,
-          durReturn: 0.8,
-          promoteOverlap: 0.45,
-          returnDelay: 0.2,
-        };
+        ease: "power1.inOut",
+        durDrop: 0.8,
+        durMove: 0.8,
+        durReturn: 0.8,
+        promoteOverlap: 0.45,
+        returnDelay: 0.2,
+      };
 
-  const childArr = useMemo(() => Children.toArray(children), [children]);
+  const childArr = useMemo(
+    () => Children.toArray(children),
+    [children]
+  );
   const refs = useMemo(
     () => childArr.map(() => React.createRef()),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [childArr.length]
   );
 
-  const order = useRef(Array.from({ length: childArr.length }, (_, i) => i));
+  const order = useRef(
+    Array.from({ length: childArr.length }, (_, i) => i)
+  );
 
   const tlRef = useRef(null);
   const intervalRef = useRef();
@@ -188,21 +195,20 @@ const CardSwap = ({
   const rendered = childArr.map((child, i) =>
     isValidElement(child)
       ? cloneElement(child, {
-          key: i,
-          ref: refs[i],
-          style: { width, height, ...(child.props.style ?? {}) },
-          onClick: (e) => {
-            child.props.onClick?.(e);
-            onCardClick?.(i);
-          },
-        })
-      : child
+        key: i,
+        ref: refs[i],
+        style: { width, height, ...(child.props.style ?? {}) },
+        onClick: (e) => {
+          child.props.onClick?.(e);
+          onCardClick?.(i);
+        },
+      }) : child
   );
 
   return (
     <div
       ref={container}
-      className="card-swap-container"
+      className="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible max-[768px]:translate-x-[25%] max-[768px]:translate-y-[25%] max-[768px]:scale-[0.75] max-[480px]:translate-x-[25%] max-[480px]:translate-y-[25%] max-[480px]:scale-[0.55]"
       style={{ width, height }}
     >
       {rendered}

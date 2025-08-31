@@ -1,57 +1,42 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import { gsap } from "gsap";
-import "./Css/PillNav.css";
 
 const PillNav = ({
   logo,
   logoAlt = "Logo",
-  items,
-  activeHref,
+  items = [],
   className = "",
   ease = "power3.easeOut",
   baseColor = "#fff",
   pillColor = "#060010",
   hoveredPillTextColor = "#060010",
   pillTextColor,
-  onMobileMenuClick,
   initialLoadAnimation = true,
 }) => {
   const resolvedPillTextColor = pillTextColor ?? baseColor;
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const circleRefs = useRef([]);
   const tlRefs = useRef([]);
   const activeTweenRefs = useRef([]);
   const logoImgRef = useRef(null);
-  const logoTweenRef = useRef(null);
-  const hamburgerRef = useRef(null);
-  const mobileMenuRef = useRef(null);
-  const navItemsRef = useRef(null);
   const logoRef = useRef(null);
 
+  // GSAP Layout setup
   useEffect(() => {
     const layout = () => {
       circleRefs.current.forEach((circle) => {
         if (!circle?.parentElement) return;
-
         const pill = circle.parentElement;
-        const rect = pill.getBoundingClientRect();
-        const { width: w, height: h } = rect;
+        const { width: w, height: h } = pill.getBoundingClientRect();
         const R = ((w * w) / 4 + h * h) / (2 * h);
         const D = Math.ceil(2 * R) + 2;
-        const delta =
-          Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
+        const delta = Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
         const originY = D - delta;
 
         circle.style.width = `${D}px`;
         circle.style.height = `${D}px`;
         circle.style.bottom = `-${delta}px`;
 
-        gsap.set(circle, {
-          xPercent: -50,
-          scale: 0,
-          transformOrigin: `50% ${originY}px`,
-        });
+        gsap.set(circle, { xPercent: -50, scale: 0, transformOrigin: `50% ${originY}px` });
 
         const label = pill.querySelector(".pill-label");
         const white = pill.querySelector(".pill-label-hover");
@@ -64,310 +49,121 @@ const PillNav = ({
 
         tlRefs.current[index]?.kill();
         const tl = gsap.timeline({ paused: true });
-
-        tl.to(
-          circle,
-          { scale: 1.2, xPercent: -50, duration: 2, ease, overwrite: "auto" },
-          0
-        );
-
-        if (label) {
-          tl.to(
-            label,
-            { y: -(h + 8), duration: 2, ease, overwrite: "auto" },
-            0
-          );
-        }
-
-        if (white) {
-          gsap.set(white, { y: Math.ceil(h + 100), opacity: 0 });
-          tl.to(
-            white,
-            { y: 0, opacity: 1, duration: 2, ease, overwrite: "auto" },
-            0
-          );
-        }
+        tl.to(circle, { scale: 1.2, xPercent: -50, duration: 2, ease, overwrite: "auto" }, 0);
+        if (label) tl.to(label, { y: -(h + 8), duration: 2, ease, overwrite: "auto" }, 0);
+        if (white) tl.to(white, { y: 0, opacity: 1, duration: 2, ease, overwrite: "auto" }, 0);
 
         tlRefs.current[index] = tl;
       });
     };
 
     layout();
-
-    const onResize = () => layout();
-    window.addEventListener("resize", onResize);
-
-    if (document.fonts?.ready) {
-      document.fonts.ready.then(layout).catch(() => {});
-    }
-
-    const menu = mobileMenuRef.current;
-    if (menu) {
-      gsap.set(menu, { visibility: "hidden", opacity: 0, scaleY: 1 });
-    }
+    window.addEventListener("resize", layout);
 
     if (initialLoadAnimation) {
       const logo = logoRef.current;
-      const navItems = navItemsRef.current;
-
       if (logo) {
         gsap.set(logo, { scale: 0 });
-        gsap.to(logo, {
-          scale: 1,
-          duration: 0.6,
-          ease,
-        });
-      }
-
-      if (navItems) {
-        gsap.set(navItems, { width: 0, overflow: "hidden" });
-        gsap.to(navItems, {
-          width: "auto",
-          duration: 0.6,
-          ease,
-        });
+        gsap.to(logo, { scale: 1, duration: 0.6, ease });
       }
     }
 
-    return () => window.removeEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", layout);
   }, [items, ease, initialLoadAnimation]);
 
   const handleEnter = (i) => {
     const tl = tlRefs.current[i];
     if (!tl) return;
     activeTweenRefs.current[i]?.kill();
-    activeTweenRefs.current[i] = tl.tweenTo(tl.duration(), {
-      duration: 0.3,
-      ease,
-      overwrite: "auto",
-    });
+    activeTweenRefs.current[i] = tl.tweenTo(tl.duration(), { duration: 0.3, ease, overwrite: "auto" });
   };
 
   const handleLeave = (i) => {
     const tl = tlRefs.current[i];
     if (!tl) return;
     activeTweenRefs.current[i]?.kill();
-    activeTweenRefs.current[i] = tl.tweenTo(0, {
-      duration: 0.2,
-      ease,
-      overwrite: "auto",
-    });
+    activeTweenRefs.current[i] = tl.tweenTo(0, { duration: 0.2, ease, overwrite: "auto" });
   };
 
-  const handleLogoEnter = () => {
-    const img = logoImgRef.current;
-    if (!img) return;
-    logoTweenRef.current?.kill();
-    gsap.set(img, { rotate: 0 });
-    logoTweenRef.current = gsap.to(img, {
-      rotate: 360,
-      duration: 0.2,
-      ease,
-      overwrite: "auto",
-    });
-  };
-
-  const toggleMobileMenu = () => {
-    const newState = !isMobileMenuOpen;
-    setIsMobileMenuOpen(newState);
-
-    const hamburger = hamburgerRef.current;
-    const menu = mobileMenuRef.current;
-
-    if (hamburger) {
-      const lines = hamburger.querySelectorAll(".hamburger-line");
-      if (newState) {
-        gsap.to(lines[0], { rotation: 45, y: 3, duration: 0.3, ease });
-        gsap.to(lines[1], { rotation: -45, y: -3, duration: 0.3, ease });
-      } else {
-        gsap.to(lines[0], { rotation: 0, y: 0, duration: 0.3, ease });
-        gsap.to(lines[1], { rotation: 0, y: 0, duration: 0.3, ease });
-      }
+  // Scroll smoothly to section
+  const handleScrollTo = (targetId) => {
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-
-    if (menu) {
-      if (newState) {
-        gsap.set(menu, { visibility: "visible" });
-        gsap.fromTo(
-          menu,
-          { opacity: 0, y: 10, scaleY: 1 },
-          {
-            opacity: 1,
-            y: 0,
-            scaleY: 1,
-            duration: 0.3,
-            ease,
-            transformOrigin: "top center",
-          }
-        );
-      } else {
-        gsap.to(menu, {
-          opacity: 0,
-          y: 10,
-          scaleY: 1,
-          duration: 0.2,
-          ease,
-          transformOrigin: "top center",
-          onComplete: () => {
-            gsap.set(menu, { visibility: "hidden" });
-          },
-        });
-      }
-    }
-
-    onMobileMenuClick?.();
   };
-
-  const isExternalLink = (href) =>
-    href.startsWith("http://") ||
-    href.startsWith("https://") ||
-    href.startsWith("//") ||
-    href.startsWith("mailto:") ||
-    href.startsWith("tel:");
-
-  const isRouterLink = (href) => href && !isExternalLink(href);
 
   const cssVars = {
     ["--base"]: baseColor,
     ["--pill-bg"]: pillColor,
     ["--hover-text"]: hoveredPillTextColor,
     ["--pill-text"]: resolvedPillTextColor,
-  };
-
-  // ✅ helper for smooth scroll
-  const handleScrollTo = (targetId) => {
-    const el = document.getElementById(targetId);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      setIsMobileMenuOpen(false);
-    }
+    ["--nav-h"]: "42px",
+    ["--logo"]: "36px",
+    ["--pill-pad-x"]: "18px",
+    ["--pill-gap"]: "3px",
   };
 
   return (
-    <div className="pill-nav-container">
+    <div className="absolute top-[1em] z-[1000] w-full md:w-auto md:left-auto">
       <nav
-        className={`pill-nav ${className}`}
+        className={`w-full md:w-max flex items-center justify-between md:justify-start box-border px-4 md:px-0 ${className}`}
         aria-label="Primary"
         style={cssVars}
       >
+        {/* Logo */}
         <div
-          className="pill-logo"
-          onMouseEnter={handleLogoEnter}
           ref={logoRef}
+          onMouseEnter={() => gsap.to(logoImgRef.current, { rotate: 360, duration: 0.2 })}
+          className="rounded-full p-2 inline-flex items-center justify-center overflow-hidden cursor-pointer"
+          style={{ width: "var(--nav-h)", height: "var(--nav-h)", background: "var(--base, #000)" }}
         >
-          <img src={logo} alt={logoAlt} ref={logoImgRef} />
+          <img src={logo} alt={logoAlt} ref={logoImgRef} className="w-full h-full object-cover block" />
         </div>
 
-        <div className="pill-nav-items desktop-only" ref={navItemsRef}>
-          <ul className="pill-list" role="menubar">
-            {items.map((item, i) => (
-              <li key={item.href || item.targetId || `item-${i}`} role="none">
-                {item.targetId ? (
-                  // ✅ smooth scroll
-                  <button
-                    className={`pill${activeHref === `#${item.targetId}` ? " is-active" : ""}`}
-                    onClick={() => handleScrollTo(item.targetId)}
-                    onMouseEnter={() => handleEnter(i)}
-                    onMouseLeave={() => handleLeave(i)}
-                  >
-                    <span
-                      className="hover-circle"
-                      aria-hidden="true"
-                      ref={(el) => (circleRefs.current[i] = el)}
-                    />
-                    <span className="label-stack">
-                      <span className="pill-label">{item.label}</span>
-                      <span className="pill-label-hover">{item.label}</span>
-                    </span>
-                  </button>
-                ) : isRouterLink(item.href) ? (
-                  <Link
-                    to={item.href}
-                    className={`pill${activeHref === item.href ? " is-active" : ""}`}
-                    onMouseEnter={() => handleEnter(i)}
-                    onMouseLeave={() => handleLeave(i)}
-                  >
-                    <span
-                      className="hover-circle"
-                      aria-hidden="true"
-                      ref={(el) => (circleRefs.current[i] = el)}
-                    />
-                    <span className="label-stack">
-                      <span className="pill-label">{item.label}</span>
-                      <span className="pill-label-hover">{item.label}</span>
-                    </span>
-                  </Link>
-                ) : (
-                  <a
-                    href={item.href}
-                    className={`pill${activeHref === item.href ? " is-active" : ""}`}
-                    onMouseEnter={() => handleEnter(i)}
-                    onMouseLeave={() => handleLeave(i)}
-                  >
-                    <span
-                      className="hover-circle"
-                      aria-hidden="true"
-                      ref={(el) => (circleRefs.current[i] = el)}
-                    />
-                    <span className="label-stack">
-                      <span className="pill-label">{item.label}</span>
-                      <span className="pill-label-hover">{item.label}</span>
-                    </span>
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <button
-          className="mobile-menu-button mobile-only"
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-          ref={hamburgerRef}
+        {/* Pills */}
+        <ul
+          className="relative items-center rounded-full hidden md:flex ml-2 list-none flex-row gap-[var(--pill-gap)]"
+          style={{ height: "var(--nav-h)" }}
         >
-          <span className="hamburger-line" />
-          <span className="hamburger-line" />
-        </button>
-      </nav>
+          {items.map((item, i) => {
+            const pillStyle = {
+              background: "var(--pill-bg, #fff)",
+              color: "var(--pill-text, var(--base, #000))",
+              paddingLeft: "var(--pill-pad-x)",
+              paddingRight: "var(--pill-pad-x)",
+            };
 
-      {/* Mobile */}
-      <div
-        className="mobile-menu-popover mobile-only"
-        ref={mobileMenuRef}
-        style={cssVars}
-      >
-        <ul className="mobile-menu-list">
-          {items.map((item, i) => (
-            <li key={item.href || item.targetId || `mobile-item-${i}`}>
-              {item.targetId ? (
+            return (
+              <li key={item.targetId || item.label} className="relative h-full flex">
                 <button
-                  className="mobile-menu-link"
                   onClick={() => handleScrollTo(item.targetId)}
+                  onMouseEnter={() => handleEnter(i)}
+                  onMouseLeave={() => handleLeave(i)}
+                  className="relative overflow-hidden inline-flex items-center justify-center h-full font-semibold text-[16px] leading-[0] uppercase tracking-[0.2px] whitespace-nowrap cursor-pointer rounded-full px-0"
+                  style={pillStyle}
                 >
-                  {item.label}
+                  <span
+                    className="hover-circle absolute left-1/2 bottom-0 rounded-full z-[1] block pointer-events-none"
+                    ref={(el) => (circleRefs.current[i] = el)}
+                    style={{ background: "var(--base, #000)" }}
+                  />
+                  <span className="label-stack relative inline-block leading-[1] z-[2]">
+                    <span className="pill-label relative z-[2] inline-block leading-[1]">{item.label}</span>
+                    <span
+                      className="pill-label-hover absolute left-0 top-0 z-[3] inline-block"
+                      style={{ color: "var(--hover-text, #fff)" }}
+                      aria-hidden="true"
+                    >
+                      {item.label}
+                    </span>
+                  </span>
                 </button>
-              ) : isRouterLink(item.href) ? (
-                <Link
-                  to={item.href}
-                  className={`mobile-menu-link${activeHref === item.href ? " is-active" : ""}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <a
-                  href={item.href}
-                  className={`mobile-menu-link${activeHref === item.href ? " is-active" : ""}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              )}
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
-      </div>
+      </nav>
     </div>
   );
 };

@@ -1,10 +1,11 @@
-import CardSwap, { Card } from "./CardSwap";
+import CardSwap, { Card } from "./CardSwap.jsx";
 import reactsvg from "../assets/react-javascript-js-framework-facebook-svgrepo-com.svg";
 import nextsvg from "../assets/nextjs-svgrepo-com.svg";
 import tailwindsvg from "../assets/tailwind-svgrepo-com-2.svg";
 import nodejssvg from "../assets/nodejs02-svgrepo-com.svg";
 import expresssvg from "../assets/express-svgrepo-com.svg";
 import sqlsvg from "../assets/sql-svgrepo-com.svg"
+import gtisvg from "../assets/git-svgrepo-com-2.svg"
 
 export default function CardSwapComp() {
   return (
@@ -42,10 +43,10 @@ export default function CardSwapComp() {
             <h3 className="text-2xl font-bold text-white p-4">
               Frontend Development
             </h3>
-            <p className="text-gray-300 p-4">
+            <p className="text-gray-300 p-2 text-center">
               React, Next.js, TailwindCSS, JavaScript
             </p>
-            <div className="flex justify-center p-4">
+            <div className="flex justify-center p-2">
               <img src={reactsvg} alt="React Logo" className="h-16 w-16 p-2" />
               <img src={nextsvg} alt="next Logo" className="h-14 w-14 p-2" />
               <img
@@ -59,10 +60,10 @@ export default function CardSwapComp() {
             <h3 className="text-2xl font-bold text-white p-4">
               Backend Development
             </h3>
-            <p className="text-gray-300 p-4">
+            <p className="text-gray-300 p-2 text-center">
               Node.js, Express, PostgreSQL, MongoDB
             </p>
-            <div className="flex justify-center p-4">
+            <div className="flex justify-center p-2">
               <img
                 src={nodejssvg}
                 alt="nodejs Logo"
@@ -82,7 +83,14 @@ export default function CardSwapComp() {
           </Card>
           <Card>
             <h3 className="text-2xl font-bold text-white p-4">Other Skills</h3>
-            <p className="text-gray-300 p-4">Git, REST APIs</p>
+            <p className="text-gray-300 p-2 text-center">Git, REST APIs</p>
+            <div className="flex justify-center p-4">
+               <img
+                src={gtisvg}
+                alt="git Logo"
+                className="h-18 w-18 p-2"
+              />
+            </div>
           </Card>
         </CardSwap>
       </div>
