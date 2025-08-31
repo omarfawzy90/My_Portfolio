@@ -3,12 +3,25 @@ import Hero from "./components/Hero";
 import PillNav from "./components/Nav";
 import logo from "./assets/IMG_5173.PNG";
 import CardSwapComp from "./components/CardSwapcom";
-import { useNavigate } from "react-router-dom";
 import Footer from "./components/Footer";
+import LogoLoop from "./components/Loop";
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiJavascript
+} from "react-icons/si";
+
+
+const techLogos = [
+  { node: <SiReact size={40} color="#61DBFB" />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs size={40} color="white" />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiJavascript size={40} color="#b9de41ff" />, title: "Javascript", href: "https://www.javascript.com" },
+  { node: <SiTailwindcss size={40} color="#38BDF8" />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+];
+
 
 const App = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="relative w-full min-h-screen bg-black overflow-hidden">
       <div className="fixed top-0 left-0 right-0 flex justify-center z-20">
@@ -33,10 +46,28 @@ const App = () => {
         <Hero />
       </div>
 
+      {/* Tech Logos Loop */}
+      <div className="relative overflow-hidden h-[200px]">
+        <LogoLoop
+          logos={techLogos}
+          speed={90}
+          direction="left"
+          logoHeight={48}
+          gap={40}
+          pauseOnHover
+          scaleOnHover
+          fadeOut
+          fadeOutColor="#ffffff"
+          ariaLabel="Technology partners"
+        />
+      </div>
+
+      {/* About Section */}
       <div id="about">
         <CardSwapComp />
       </div>
 
+      {/* Contact / Footer */}
       <div id="contact" className="my-25">
         <Footer />
       </div>
