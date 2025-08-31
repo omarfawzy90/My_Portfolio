@@ -10,16 +10,13 @@ const Footer = () => {
     const subject = 'Contact Request';
     const body = 'Hello,\n\nI would like to get in touch with you.\n\nBest regards';
     
-    // Encode the mailto URL properly
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
     console.log('Attempting to open:', mailtoLink); 
     
     try {
-      // Primary method - direct assignment
       window.location.href = mailtoLink;
       
-      // Fallback - create temporary link
       setTimeout(() => {
         const link = document.createElement('a');
         link.href = mailtoLink;
@@ -31,7 +28,6 @@ const Footer = () => {
       
     } catch (error) {
       console.error('Mailto failed:', error);
-      // Fallback - copy email to clipboard
       navigator.clipboard.writeText(email).then(() => {
         alert(`Email copied to clipboard: ${email}`);
       }).catch(() => {

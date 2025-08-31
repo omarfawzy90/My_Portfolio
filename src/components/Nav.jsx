@@ -23,7 +23,6 @@ const PillNav = ({
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  // GSAP Layout setup
   useEffect(() => {
     const layout = () => {
       circleRefs.current.forEach((circle) => {
@@ -88,7 +87,6 @@ const PillNav = ({
     activeTweenRefs.current[i] = tl.tweenTo(0, { duration: 0.2, ease, overwrite: "auto" });
   };
 
-  // Scroll smoothly to section
   const handleScrollTo = (targetId) => {
     const target = document.getElementById(targetId);
     if (target) {
@@ -97,7 +95,6 @@ const PillNav = ({
     }
   };
 
-  // Toggle mobile menu with GSAP
   const toggleMobileMenu = () => {
     const menu = mobileMenuRef.current;
     if (!menu) return;
@@ -138,7 +135,6 @@ const PillNav = ({
         aria-label="Primary"
         style={cssVars}
       >
-        {/* Logo */}
         <div
           ref={logoRef}
           onMouseEnter={() => gsap.to(logoImgRef.current, { rotate: 360, duration: 0.2 })}
@@ -148,7 +144,6 @@ const PillNav = ({
           <img src={logo} alt={logoAlt} ref={logoImgRef} className="w-full h-full object-cover block" />
         </div>
 
-        {/* Pills (Desktop) */}
         <ul
           className="relative items-center rounded-full hidden md:flex ml-2 list-none flex-row gap-[var(--pill-gap)]"
           style={{ height: "var(--nav-h)" }}
@@ -191,7 +186,6 @@ const PillNav = ({
           })}
         </ul>
 
-        {/* Hamburger Button (Mobile) */}
         <button
           onClick={toggleMobileMenu}
           className="md:hidden flex flex-col justify-center items-center gap-1 p-2 rounded-full bg-black"
@@ -202,7 +196,6 @@ const PillNav = ({
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <div ref={mobileMenuRef} className="md:hidden absolute top-14 left-4 right-4 bg-black rounded-lg shadow-lg hidden">
         <ul className="flex flex-col gap-2 p-4">
           {items.map((item) => (

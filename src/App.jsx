@@ -16,7 +16,7 @@ import {
 const techLogos = [
   { node: <SiReact size={40} color="#61DBFB" />, title: "React", href: "https://react.dev" },
   { node: <SiNextdotjs size={40} color="white" />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiJavascript size={40} color="#b9de41ff" />, title: "Javascript", href: "https://www.javascript.com" },
+  { node: <SiJavascript size={40} color="#c4e63cff" />, title: "Javascript", href: "https://www.javascript.com" },
   { node: <SiTailwindcss size={40} color="#38BDF8" />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
 ];
 
