@@ -19,6 +19,9 @@ const PillNav = ({
   const activeTweenRefs = useRef([]);
   const logoImgRef = useRef(null);
   const logoRef = useRef(null);
+  const mobileMenuRef = useRef(null);
+
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   // GSAP Layout setup
   useEffect(() => {
@@ -90,6 +93,30 @@ const PillNav = ({
     const target = document.getElementById(targetId);
     if (target) {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
+      setIsMobileOpen(false);
+    }
+  };
+
+  // Toggle mobile menu with GSAP
+  const toggleMobileMenu = () => {
+    const menu = mobileMenuRef.current;
+    if (!menu) return;
+
+    if (!isMobileOpen) {
+      setIsMobileOpen(true);
+      gsap.set(menu, { display: "block", opacity: 0, y: -20 });
+      gsap.to(menu, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" });
+    } else {
+      gsap.to(menu, {
+        opacity: 0,
+        y: -20,
+        duration: 0.2,
+        ease: "power3.in",
+        onComplete: () => {
+          gsap.set(menu, { display: "none" });
+          setIsMobileOpen(false);
+        },
+      });
     }
   };
 
@@ -121,7 +148,7 @@ const PillNav = ({
           <img src={logo} alt={logoAlt} ref={logoImgRef} className="w-full h-full object-cover block" />
         </div>
 
-        {/* Pills */}
+        {/* Pills (Desktop) */}
         <ul
           className="relative items-center rounded-full hidden md:flex ml-2 list-none flex-row gap-[var(--pill-gap)]"
           style={{ height: "var(--nav-h)" }}
@@ -163,7 +190,33 @@ const PillNav = ({
             );
           })}
         </ul>
+
+        {/* Hamburger Button (Mobile) */}
+        <button
+          onClick={toggleMobileMenu}
+          className="md:hidden flex flex-col justify-center items-center gap-1 p-2 rounded-full bg-black"
+        >
+          <span className="w-5 h-0.5 bg-white block"></span>
+          <span className="w-5 h-0.5 bg-white block"></span>
+          <span className="w-5 h-0.5 bg-white block"></span>
+        </button>
       </nav>
+
+      {/* Mobile Menu */}
+      <div ref={mobileMenuRef} className="md:hidden absolute top-14 left-4 right-4 bg-black rounded-lg shadow-lg hidden">
+        <ul className="flex flex-col gap-2 p-4">
+          {items.map((item) => (
+            <li key={item.targetId || item.label}>
+              <button
+                onClick={() => handleScrollTo(item.targetId)}
+                className="w-full text-left px-4 py-2 rounded-full text-white bg-black hover:bg-white hover:text-black transition-all"
+              >
+                {item.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
