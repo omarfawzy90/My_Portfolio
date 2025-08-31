@@ -4,6 +4,7 @@ import nextsvg from "../assets/nextjs-svgrepo-com.svg";
 import tailwindsvg from "../assets/tailwind-svgrepo-com-2.svg";
 import nodejssvg from "../assets/nodejs02-svgrepo-com.svg";
 import expresssvg from "../assets/express-svgrepo-com.svg";
+import sqlsvg from "../assets/sql-svgrepo-com.svg"
 
 export default function CardSwapComp() {
   return (
@@ -70,6 +71,11 @@ export default function CardSwapComp() {
               <img
                 src={expresssvg}
                 alt="express Logo"
+                className="h-18 w-18 p-2"
+              />
+              <img
+                src={sqlsvg}
+                alt="sql Logo"
                 className="h-18 w-18 p-2"
               />
             </div>
