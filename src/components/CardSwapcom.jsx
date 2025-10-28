@@ -6,15 +6,17 @@ import nodejssvg from "../assets/nodejs02-svgrepo-com.svg";
 import expresssvg from "../assets/express-svgrepo-com.svg";
 import sqlsvg from "../assets/sql-svgrepo-com.svg";
 import gtisvg from "../assets/git-svgrepo-com-2.svg";
+import phpsvg from "../assets/php02-svgrepo-com.svg";
 
 export default function CardSwapComp() {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-16">
-      <div className="w-full md:w-1/2 text-white space-y-6 px-4 md:px-12">
-        <h1 className="text-3xl md:text-5xl font-bold underline decoration-green-500 text-center md:text-left">
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10 px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      {/* Text Content */}
+      <div className="w-full lg:w-1/2 text-white space-y-4 sm:space-y-6 max-w-2xl">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold underline decoration-green-500 text-center lg:text-left">
           Technologies & Tools
         </h1>
-        <h2 className="text-base md:text-xl text-gray-300 leading-relaxed text-center md:text-left">
+        <h2 className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed text-center lg:text-left">
           I am a{" "}
           <span className="text-white font-semibold">
             self-taught full-stack developer
@@ -35,7 +37,7 @@ export default function CardSwapComp() {
           and thrive in collaborative teams where innovation drives impact.
           <br />
           <br />
-          Whether it’s building a new website, optimizing a system, or crafting
+          Whether it's building a new website, optimizing a system, or crafting
           interactive web apps, I aim to{" "}
           <span className="text-green-400 font-bold">
             turn ideas into high-quality digital experiences
@@ -44,54 +46,60 @@ export default function CardSwapComp() {
         </h2>
       </div>
 
-      <div
-        className="w-full md:w-1/2"
-        style={{ height: "auto", minHeight: "350px", position: "relative" }}
-      >
-        <CardSwap
-          cardDistance={40}
-          verticalDistance={60}
-          delay={3000}
-          pauseOnHover={true}
+      {/* Card Swap Component */}
+      <div className="w-full lg:w-1/2 flex justify-center items-center">
+        <div 
+          className="w-full max-w-md lg:max-w-lg"
+          style={{ minHeight: "350px", position: "relative" }}
         >
-          <Card>
-            <h3 className="text-xl md:text-2xl font-bold text-white p-4 text-center">
-              Frontend Development
-            </h3>
-            <p className="text-gray-300 p-2 text-center">
-              React, Next.js, TailwindCSS, JavaScript
-            </p>
-            <div className="flex flex-wrap justify-center p-2 gap-2">
-              <img src={reactsvg} alt="React Logo" className="h-12 w-12 md:h-16 md:w-16" />
-              <img src={nextsvg} alt="next Logo" className="h-12 w-12 md:h-14 md:w-14" />
-              <img src={tailwindsvg} alt="tailwind Logo" className="h-12 w-12 md:h-14 md:w-14" />
-            </div>
-          </Card>
+          <CardSwap
+            cardDistance={40}
+            verticalDistance={60}
+            delay={3000}
+            pauseOnHover={true}
+          >
+            <Card>
+              <h3 className="text-xl sm:text-2xl font-bold text-white p-3 sm:p-4 text-center">
+                Frontend Development
+              </h3>
+              <p className="text-gray-300 px-2 pb-2 text-sm sm:text-base text-center">
+                React, Next.js, TailwindCSS, JavaScript
+              </p>
+              <div className="flex flex-wrap justify-center p-2 gap-2 sm:gap-3">
+                <img src={reactsvg} alt="React Logo" className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16" />
+                <img src={nextsvg} alt="Next.js Logo" className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16" />
+                <img src={tailwindsvg} alt="Tailwind CSS Logo" className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16" />
+              </div>
+            </Card>
 
-          <Card>
-            <h3 className="text-xl md:text-2xl font-bold text-white p-4 text-center">
-              Backend Development
-            </h3>
-            <p className="text-gray-300 p-2 text-center">
-              Node.js, Express, PostgreSQL, MongoDB
-            </p>
-            <div className="flex flex-wrap justify-center p-2 gap-2">
-              <img src={nodejssvg} alt="nodejs Logo" className="h-12 w-12 md:h-14 md:w-14" />
-              <img src={expresssvg} alt="express Logo" className="h-12 w-12 md:h-14 md:w-14" />
-              <img src={sqlsvg} alt="sql Logo" className="h-12 w-12 md:h-14 md:w-14" />
-            </div>
-          </Card>
+            <Card>
+              <h3 className="text-xl sm:text-2xl font-bold text-white p-3 sm:p-4 text-center">
+                Backend Development
+              </h3>
+              <p className="text-gray-300 px-2 pb-2 text-sm sm:text-base text-center">
+                Node.js, Express, PHP, Laravel, PostgreSQL, MongoDB
+              </p>
+              <div className="flex flex-wrap justify-center p-2 gap-2 sm:gap-3">
+                <img src={nodejssvg} alt="Node.js Logo" className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16" />
+                <img src={expresssvg} alt="Express Logo" className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16" />
+                <img src={sqlsvg} alt="SQL Logo" className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16" />
+                <img src={phpsvg} alt="PHP Logo" className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16" />
+              </div>
+            </Card>
 
-          <Card>
-            <h3 className="text-xl md:text-2xl font-bold text-white p-4 text-center">
-              Other Skills
-            </h3>
-            <p className="text-gray-300 p-2 text-center">Git, REST APIs</p>
-            <div className="flex justify-center p-4">
-              <img src={gtisvg} alt="git Logo" className="h-12 w-12 md:h-16 md:w-16" />
-            </div>
-          </Card>
-        </CardSwap>
+            <Card>
+              <h3 className="text-xl sm:text-2xl font-bold text-white p-3 sm:p-4 text-center">
+                Other Skills
+              </h3>
+              <p className="text-gray-300 px-2 pb-2 text-sm sm:text-base text-center">
+                Git, REST APIs, Version Control, Wordpress
+              </p>
+              <div className="flex justify-center p-3 sm:p-4">
+                <img src={gtisvg} alt="Git Logo" className="h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20" />
+              </div>
+            </Card>
+          </CardSwap>
+        </div>
       </div>
     </div>
   );

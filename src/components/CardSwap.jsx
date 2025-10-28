@@ -57,6 +57,13 @@ const CardSwap = ({
   easing = "elastic",
   children,
 }) => {
+  // Responsive adjustments
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  const isTablet = typeof window !== 'undefined' && window.innerWidth >= 640 && window.innerWidth < 1024;
+  
+  const responsiveWidth = isMobile ? Math.min(width * 0.75, 350) : isTablet ? Math.min(width * 0.85, 420) : width;
+  const responsiveHeight = isMobile ? Math.min(height * 0.75, 300) : isTablet ? Math.min(height * 0.85, 340) : height;
+  
   const config =
     easing === "elastic"
       ? {
@@ -197,7 +204,7 @@ const CardSwap = ({
       ? cloneElement(child, {
         key: i,
         ref: refs[i],
-        style: { width, height, ...(child.props.style ?? {}) },
+        style: { width: responsiveWidth, height: responsiveHeight, ...(child.props.style ?? {}) },
         onClick: (e) => {
           child.props.onClick?.(e);
           onCardClick?.(i);
@@ -208,8 +215,8 @@ const CardSwap = ({
   return (
     <div
       ref={container}
-      className="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible max-[768px]:translate-x-[25%] max-[768px]:translate-y-[25%] max-[768px]:scale-[0.75] max-[480px]:translate-x-[25%] max-[480px]:translate-y-[25%] max-[480px]:scale-[0.55]"
-      style={{ width, height }}
+      className="relative mx-auto perspective-[900px] overflow-visible"
+      style={{ width: responsiveWidth, height: responsiveHeight }}
     >
       {rendered}
     </div>
