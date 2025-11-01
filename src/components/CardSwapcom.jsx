@@ -19,7 +19,7 @@ export default function CardSwapComp() {
         <h2 className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed text-center lg:text-left">
           I am a{" "}
           <span className="text-white font-semibold">
-            self-taught full-stack developer
+            self-taught backend developer
           </span>{" "}
           specializing in
           <span className="text-green-400 font-bold">

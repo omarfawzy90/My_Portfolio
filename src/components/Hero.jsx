@@ -32,7 +32,7 @@ const Hero = () => {
 
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
         <Title
-          text={["Welcome!", "I'm Omar Fawzy", "Back-end Web Developer"]}
+          text={["Welcome!", "I'm Omar Fawzy", "Backend Web Developer"]}
           typingSpeed={75}
           pauseDuration={1500}
           showCursor={true}
