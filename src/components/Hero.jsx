@@ -7,8 +7,8 @@ const Hero = () => {
   const handleResumeDownload = () => {
     // You'll need to add your resume PDF to the public folder
     const link = document.createElement('a');
-    link.href = '/Dev Omar Fawzy.pdf'; // Make sure to add this file to public folder
-    link.download = 'Dev Omar Fawzy.pdf';
+    link.href = '/Dev Backend Omar Fawzy.pdf'; 
+    link.download = 'Dev Backend Omar Fawzy.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -32,7 +32,7 @@ const Hero = () => {
 
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
         <Title
-          text={["Welcome!", "I'm Omar Fawzy", "Full-Stack Web Developer"]}
+          text={["Welcome!", "I'm Omar Fawzy", "Back-end Web Developer"]}
           typingSpeed={75}
           pauseDuration={1500}
           showCursor={true}
