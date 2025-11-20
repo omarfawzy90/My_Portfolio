@@ -10,10 +10,11 @@ import {
   SiTailwindcss,
   SiJavascript,
   SiPhp,
-  SiLaravel
+  SiLaravel,
+    SiDotnet,
 } from "react-icons/si";
+import {TbBrandCSharp} from "react-icons/tb";
 
-// Lazy load heavy components
 const CardSwapComp = lazy(() => import("./components/CardSwapcom"));
 const Projects = lazy(() => import("./components/Projects"));
 const Footer = lazy(() => import("./components/Footer"));
@@ -27,6 +28,8 @@ const techLogos = [
   { node: <SiTailwindcss size={40} color="#38BDF8" />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
   { node: <SiPhp size={40} color="#787CB5" />, title: "PHP", href: "https://www.php.net" },
   { node: <SiLaravel size={40} color="#FF2D20" />, title: "Laravel", href: "https://laravel.com" },
+    { node: <SiDotnet size={40} color="#FF2D20" />, title: "Dotnet" , href: "https://dotnet.com" },
+    { node: <TbBrandCSharp size={40} color="#239120" />, title: "C#" , href: "https://learn.microsoft.com/en-us/dotnet/csharp/" },
 ];
 
 
