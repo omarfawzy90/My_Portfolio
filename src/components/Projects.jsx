@@ -8,23 +8,49 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "Portfolio Website",
+      title: "ClinicLense",
       description:
-        "A modern, responsive portfolio website built with React and Tailwind CSS featuring smooth animations and interactive components.",
-      image: portfolioImg,
-      technologies: ["React", "Tailwind CSS", "Vite"],
-      github: "https://github.com/omarfawzy90/My_Portfolio",
-      live: "#",
+        "A high-performance dental clinic discovery and rating platform enabling dentists to search, filter, and review verified clinics. Features multilingual support (EN/AR with RTL), real-time search, role-based auth, and a premium mobile-first UI.",
+      image: "",
+      technologies: [
+        "Next.js 16",
+        "React 19",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "next-intl",
+        "Tailwind CSS 4",
+      ],
+      github: "",
+      live: "https://www.cliniclens.pro",
+    },
+    {
+      title: "Veterinary Clinic Management",
+      description:
+        "Full-stack veterinary clinic management system with .NET 8 backend and Next.js 16 frontend. Features Clean Architecture, CQRS with MediatR, appointment scheduling, patient management, and role-based JWT authentication.",
+      image: "",
+      technologies: [
+        "ASP.NET Core 8",
+        "Next.js 16",
+        "TypeScript",
+        "SQL Server",
+        "Entity Framework",
+        "Redis",
+        "Zustand",
+        "TanStack Query",
+      ],
+      github: "",
+      live: "",
     },
     {
       title: "Dentist Portfolio",
       description:
-        " Designed and deployed a responsive full-stack web app for managing and showcasing dental case studies.",
+        "Designed and deployed a responsive full-stack web app for managing and showcasing dental case studies.",
       image: dentistportfolio,
       technologies: [
         "Next.js",
         "Tailwind CSS",
-        "Supabase ",
+        "Supabase",
         "Prisma",
         "Upload Things",
       ],
@@ -32,14 +58,23 @@ const Projects = () => {
       live: "https://dentist-portfolio-sigma.vercel.app",
     },
     {
-      title: "Task Management App",
+      title: "Portfolio Website",
+      description:
+        "A modern, responsive portfolio website built with React and Tailwind CSS featuring smooth animations and interactive components.",
+      image: portfolioImg,
+      technologies: ["React", "Tailwind CSS", "Vite"],
+      github: "https://github.com/omarfawzy90/My_Portfolio",
+      live: "https://www.omarfawzy.dev",
+    },
+    {
+      title: "Task Management API",
       description:
         "RESTful API for a Task Manager powered by Laravel. Features MVC architecture, full CRUD, and secure JWT-based authentication.",
       image: "",
-      technologies: ["PHP", "Laravel", "MySQL", "JWT Authentication"],
+      technologies: ["PHP", "Laravel", "MySQL", "JWT"],
       github: "https://github.com/omarfawzy90/Task-Manager",
-      live: "#",
-    }
+      live: "",
+    },
   ];
 
   return (
@@ -112,32 +147,36 @@ const Projects = () => {
 
                 {/* Links */}
                 <div className="flex gap-3 sm:gap-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm sm:text-base text-green-400 hover:text-white transition-colors group/link"
-                    aria-label={`View ${project.title} on GitHub`}
-                  >
-                    <Github
-                      size={18}
-                      className="group-hover/link:rotate-12 transition-transform"
-                    />
-                    <span className="font-mono">Code</span>
-                  </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm sm:text-base text-green-400 hover:text-white transition-colors group/link"
-                    aria-label={`View ${project.title} live demo`}
-                  >
-                    <ExternalLink
-                      size={18}
-                      className="group-hover/link:translate-x-1 transition-transform"
-                    />
-                    <span className="font-mono">Demo</span>
-                  </a>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm sm:text-base text-green-400 hover:text-white transition-colors group/link"
+                      aria-label={`View ${project.title} on GitHub`}
+                    >
+                      <Github
+                        size={18}
+                        className="group-hover/link:rotate-12 transition-transform"
+                      />
+                      <span className="font-mono">Code</span>
+                    </a>
+                  )}
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm sm:text-base text-green-400 hover:text-white transition-colors group/link"
+                      aria-label={`View ${project.title} live demo`}
+                    >
+                      <ExternalLink
+                        size={18}
+                        className="group-hover/link:translate-x-1 transition-transform"
+                      />
+                      <span className="font-mono">Demo</span>
+                    </a>
+                  )}
                 </div>
               </div>
 
