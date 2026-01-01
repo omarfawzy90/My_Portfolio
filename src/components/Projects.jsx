@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Github, ExternalLink, Code2, Folder } from "lucide-react";
 import dentistportfolio from "../assets/dentist-portfolio.png";
 import portfolioImg from "../assets/project-portfolio.png";
+import leadkey from "../assets/leadkey.png";
+import cliniclense from "../assets/cliniclense.png";
 
 const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -11,7 +13,7 @@ const Projects = () => {
       title: "ClinicLense",
       description:
         "A high-performance dental clinic discovery and rating platform enabling dentists to search, filter, and review verified clinics. Features multilingual support (EN/AR with RTL), real-time search, role-based auth, and a premium mobile-first UI.",
-      image: "",
+      image: cliniclense,
       technologies: [
         "Next.js 16",
         "React 19",
@@ -25,22 +27,13 @@ const Projects = () => {
       live: "https://www.cliniclens.pro",
     },
     {
-      title: "Veterinary Clinic Management",
+      title: "LeadKey",
       description:
-        "Full-stack veterinary clinic management system with .NET 8 backend and Next.js 16 frontend. Features Clean Architecture, CQRS with MediatR, appointment scheduling, patient management, and role-based JWT authentication.",
-      image: "",
-      technologies: [
-        "ASP.NET Core 8",
-        "Next.js 16",
-        "TypeScript",
-        "SQL Server",
-        "Entity Framework",
-        "Redis",
-        "Zustand",
-        "TanStack Query",
-      ],
+        "AI-powered lead generation tool monitoring Twitter and Hacker News 24/7. Features real-time alerts, AI intent scoring, and smart reply suggestions to turn conversations into customers.",
+      image: leadkey,
+      technologies: ["Next.js", "React", "AI Integration", "Tailwind CSS"],
       github: "",
-      live: "",
+      live: "https://www.leadkey.pro",
     },
     {
       title: "Dentist Portfolio",
@@ -65,6 +58,24 @@ const Projects = () => {
       technologies: ["React", "Tailwind CSS", "Vite"],
       github: "https://github.com/omarfawzy90/My_Portfolio",
       live: "https://www.omarfawzy.dev",
+    },
+    {
+      title: "Veterinary Clinic Management",
+      description:
+        "Full-stack veterinary clinic management system with .NET 8 backend and Next.js 16 frontend. Features Clean Architecture, CQRS with MediatR, appointment scheduling, patient management, and role-based JWT authentication.",
+      image: "",
+      technologies: [
+        "ASP.NET Core 8",
+        "Next.js 16",
+        "TypeScript",
+        "SQL Server",
+        "Entity Framework",
+        "Redis",
+        "Zustand",
+        "TanStack Query",
+      ],
+      github: "",
+      live: "",
     },
     {
       title: "Task Management API",
