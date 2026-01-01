@@ -3,37 +3,37 @@ import { Github, ExternalLink, Code2, Folder } from "lucide-react";
 import dentistportfolio from "../assets/dentist-portfolio.png";
 import portfolioImg from "../assets/project-portfolio.png";
 import leadkey from "../assets/leadkey.png";
-import cliniclense from "../assets/cliniclense.png";
+import cliniclens from "../assets/cliniclens.png";
 
 const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const projects = [
     {
-      title: "ClinicLense",
-      description:
-        "A high-performance dental clinic discovery and rating platform enabling dentists to search, filter, and review verified clinics. Features multilingual support (EN/AR with RTL), real-time search, role-based auth, and a premium mobile-first UI.",
-      image: cliniclense,
-      technologies: [
-        "Next.js 16",
-        "React 19",
-        "TypeScript",
-        "Supabase",
-        "PostgreSQL",
-        "next-intl",
-        "Tailwind CSS 4",
-      ],
-      github: "",
-      live: "https://www.cliniclens.pro",
-    },
-    {
       title: "LeadKey",
       description:
         "AI-powered lead generation tool monitoring Twitter and Hacker News 24/7. Features real-time alerts, AI intent scoring, and smart reply suggestions to turn conversations into customers.",
       image: leadkey,
-      technologies: ["Next.js", "React", "AI Integration", "Tailwind CSS"],
+      technologies: ["Next.js", "React", "AI Integration", "Gemini 2.5 Flash", "Tailwind CSS", "Supabase"],
+      github: "https://www.leadkey.pro",
+      live: "https://www.leadkey.pro", 
+    },
+    {
+      title: "ClinicLense",
+      description:
+        "A high-performance dental clinic discovery and rating platform enabling dentists to search, filter, and review verified clinics. Features multilingual support (EN/AR with RTL), real-time search, role-based auth, and a premium mobile-first UI.",
+      image: cliniclens,
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "next-intl",
+        "Tailwind CSS",
+      ],
       github: "",
-      live: "https://www.leadkey.pro",
+      live: "https://www.cliniclens.pro",
     },
     {
       title: "Dentist Portfolio",
