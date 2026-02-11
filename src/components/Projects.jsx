@@ -4,6 +4,7 @@ import dentistportfolio from "../assets/dentist-portfolio.png";
 import portfolioImg from "../assets/project-portfolio.png";
 import leadkey from "../assets/leadkey.png";
 import cliniclens from "../assets/cliniclens.png";
+import scandrum from "../assets/scandrum.png";
 
 const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -36,19 +37,21 @@ const Projects = () => {
       live: "https://www.cliniclens.pro",
     },
     {
-      title: "Dentist Portfolio",
+      title: "ScanDrum",
       description:
-        "Designed and deployed a responsive full-stack web app for managing and showcasing dental case studies.",
-      image: dentistportfolio,
+        "Developed the backend infrastructure for a multi-tenant e-commerce platform enabling merchants to create and manage online stores with custom domains, product catalogs, and order processing for a mobile-first shopping experience (Flutter app)",
+      image: scandrum,
       technologies: [
         "Next.js",
+        "NodeJS",
         "Tailwind CSS",
         "Supabase",
-        "Prisma",
-        "Upload Things",
+        "Drizzle ORM",
+        "Vercel",
+        "PostgreSQL"
       ],
-      github: "https://github.com/omarfawzy90/Dentist-portfolio",
-      live: "https://dentist-portfolio-sigma.vercel.app",
+      live: "https://app.scandrum.com",
+      mainWebsite: "https://www.scandrum.com",
     },
     {
       title: "Portfolio Website",
@@ -187,6 +190,21 @@ const Projects = () => {
                       />
                       <span className="font-mono">Demo</span>
                     </a>
+                  )}
+                  {project.mainWebsite && (
+                    <a
+                      href={project.mainWebsite}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm sm:text-base text-green-400 hover:text-white transition-colors group/link"
+                      aria-label={`View ${project.title} live demo`}
+                    >
+                      <ExternalLink
+                        size={18}
+                        className="group-hover/link:translate-x-1 transition-transform"
+                      />
+                      <span className="font-mono">Main Website</span>
+                    </a>  
                   )}
                 </div>
               </div>
