@@ -1,98 +1,133 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import LetterGlitch from "./LetterGlitch";
-import Title from "./Title";
-import { Download, FileText } from "lucide-react";
+import { Download, ArrowRight, Linkedin, Github, Mail } from "lucide-react";
 
 const Hero = () => {
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (el) {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(30px)";
+      requestAnimationFrame(() => {
+        el.style.transition = "opacity 0.8s ease-out, transform 0.8s ease-out";
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+      });
+    }
+  }, []);
+
   const handleResumeDownload = () => {
-    // You'll need to add your resume PDF to the public folder
-    const link = document.createElement('a');
-    link.href = '/Omar - CV.pdf'; 
-    link.download = 'Omar - CV.pdf';
+    const link = document.createElement("a");
+    link.href = "/Omar_Fawzy_Master_CV.pdf";
+    link.download = "Omar_Fawzy_CV.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   const scrollToProjects = () => {
-    const projectsSection = document.getElementById('projects');
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    const el = document.getElementById("projects");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <div className="relative w-full min-h-[100dvh] bg-black overflow-hidden">
-      <LetterGlitch
-        glitchSpeed={50}
-        centerVignette={true}
-        outerVignette={true}
-        smooth={true}
-      />
+    <section className="relative w-full min-h-[100dvh] bg-black overflow-hidden flex flex-col items-center justify-center" aria-label="Hero">
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
-        <Title
-          text={["Welcome!", "I'm Omar Fawzy", "Backend Web Developer"]}
-          typingSpeed={75}
-          pauseDuration={1500}
-          showCursor={true}
-          cursorCharacter="_"
-          className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 sm:mb-8 lg:mb-12 max-w-4xl"
-          style={{ fontSize: 'clamp(2rem, 8vw, 3.75rem)' }}
-        />
-        
-        {/* Subtitle */}
-        <p className="text-white bg-transparent text-base sm:text-lg lg:text-xl max-w-2xl mb-8 sm:mb-10 lg:mb-12 px-4 leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 3.5vw, 1.25rem)' }}>
-          Transforming ideas into elegant digital solutions with modern web technologies
+      <div
+        ref={contentRef}
+        className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 w-full max-w-5xl mx-auto"
+      >
+        {/* Status Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/5 mb-6">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-emerald-400 text-xs sm:text-sm font-medium tracking-wide">
+            ServiceNow Developer @ Deloitte Innovation Hub
+          </span>
+        </div>
+
+        {/* Name */}
+        <h1
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 tracking-tight"
+          style={{ fontFamily: "var(--font-sans)" }}
+        >
+          Omar Fawzy
+        </h1>
+
+        {/* Headline */}
+        <p className="text-lg sm:text-xl md:text-2xl font-semibold text-emerald-400 mb-4 tracking-tight">
+          ServiceNow Developer & Backend Engineer
         </p>
 
-        {/* Call to Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center justify-center w-full max-w-md px-4">
-          {/* Resume Download Button */}
+        {/* Sub-headline */}
+        <p
+          className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mb-8 sm:mb-10 leading-relaxed px-4"
+          style={{ fontFamily: "var(--font-sans)" }}
+        >
+          Building enterprise ITSM solutions and scalable backend systems.{" "}
+          <br className="hidden sm:block" />
+          ServiceNow CSA certified. AI-assisted development practitioner.
+        </p>
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-center w-full max-w-md px-4 mb-8">
           <button
             onClick={handleResumeDownload}
-            className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-3 bg-green-500 hover:cursor-pointer text-black px-5 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-sm sm:text-base lg:text-lg hover:bg-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-green-500/50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-black whitespace-nowrap"
+            className="group inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-400 text-black px-6 py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25 cursor-pointer"
             aria-label="Download resume"
+            id="hero-download-resume"
           >
-            <Download size={18} className="group-hover:animate-bounce hover:cursor-pointer sm:w-5 sm:h-5" />
-            <span className="text-sm sm:text-base">Download Resume</span>
-            <FileText size={18} className="sm:w-5 sm:h-5" />
+            <Download size={18} className="group-hover:translate-y-0.5 transition-transform" />
+            <span>Download Resume</span>
           </button>
 
-          {/* View Projects Button */}
           <button
             onClick={scrollToProjects}
-            className="group relative w-full sm:w-auto hover:cursor-pointer inline-flex items-center justify-center gap-2 sm:gap-3 bg-black border-2 border-green-500 text-green-400 px-5 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-sm sm:text-base lg:text-lg hover:bg-green-500 hover:text-black transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-green-500/50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-black whitespace-nowrap"
+            className="group inline-flex items-center justify-center gap-2.5 bg-transparent border border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 px-6 py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 cursor-pointer"
             aria-label="View projects"
+            id="hero-view-projects"
           >
-            <span className="text-sm sm:text-base">View My Work</span>
-            <svg 
-              className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+            <span>View Projects</span>
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-6 sm:bottom-8 lg:bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-green-400 text-xs sm:text-sm font-mono">Scroll Down</span>
-            <svg 
-              className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
+        {/* Social Links */}
+        <div className="flex items-center gap-4">
+          <a
+            href="https://www.linkedin.com/in/omarfawzy-6029b6177/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2.5 rounded-full border border-white/10 text-gray-400 hover:text-emerald-400 hover:border-emerald-500/30 transition-all duration-300"
+            aria-label="LinkedIn profile"
+            id="hero-linkedin"
+          >
+            <Linkedin size={18} />
+          </a>
+          <a
+            href="https://github.com/omarfawzy90"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2.5 rounded-full border border-white/10 text-gray-400 hover:text-emerald-400 hover:border-emerald-500/30 transition-all duration-300"
+            aria-label="GitHub profile"
+            id="hero-github"
+          >
+            <Github size={18} />
+          </a>
+          <a
+            href="mailto:omarfawzyy90@gmail.com"
+            className="p-2.5 rounded-full border border-white/10 text-gray-400 hover:text-emerald-400 hover:border-emerald-500/30 transition-all duration-300"
+            aria-label="Send email"
+            id="hero-email"
+          >
+            <Mail size={18} />
+          </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

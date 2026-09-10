@@ -129,7 +129,7 @@ const PillNav = ({
   };
 
   return (
-    <div className="absolute top-[1em] z-[1000] w-full md:w-auto md:left-auto">
+    <div className="relative mt-[1em] z-[1000] w-full md:w-auto">
       <nav
         className={`w-full md:w-max flex items-center justify-between md:justify-start box-border px-4 md:px-0 ${className}`}
         aria-label="Primary"
