@@ -62,8 +62,8 @@ const Footer = () => {
             <h3 className="text-white text-sm font-semibold mb-3">Social</h3>
             <div className="space-y-2">
               <a
-                href="https://www.linkedin.com/in/omarfawzy-6029b6177/"
-                target="_blank"
+                href="https://www.linkedin.com/in/omar-fawzy-6029b6177"
+                target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 text-sm hover:text-emerald-400 transition-colors"
                 aria-label="LinkedIn profile"
