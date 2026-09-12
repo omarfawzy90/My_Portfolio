@@ -4,6 +4,7 @@ import PillNav from "./components/Nav";
 import logo from "./assets/IMG_5173.PNG";
 import Loading from "./components/Loading";
 import ScrollProgress from "./components/ScrollProgress";
+import Analytics from "@vercel/analytics/react";
 import {
   SiReact,
   SiNextdotjs,
@@ -133,6 +134,7 @@ const App = () => {
           <Footer />
         </Suspense>
       </div>
+      <Analytics />
     </Loading>
   );
 };
