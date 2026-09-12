@@ -4,7 +4,7 @@ import PillNav from "./components/Nav";
 import logo from "./assets/IMG_5173.PNG";
 import Loading from "./components/Loading";
 import ScrollProgress from "./components/ScrollProgress";
-import Analytics from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/react";
 import {
   SiReact,
   SiNextdotjs,
@@ -30,23 +30,69 @@ const Footer = lazy(() => import("./components/Footer"));
 const LogoLoop = lazy(() => import("./components/Loop"));
 
 const techLogos = [
-  { node: <SiReact size={36} color="#61DBFB" />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs size={36} color="#ffffff" />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiJavascript size={36} color="#F7DF1E" />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-  { node: <SiTypescript size={36} color="#3178C6" />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-  { node: <SiPostgresql size={36} color="#4169E1" />, title: "PostgreSQL", href: "https://www.postgresql.org" },
-  { node: <SiMongodb size={36} color="#47A248" />, title: "MongoDB", href: "https://www.mongodb.com" },
-  { node: <SiNodedotjs size={36} color="#5FA04E" />, title: "Node.js", href: "https://nodejs.org" },
-  { node: <SiDotnet size={36} color="#512BD4" />, title: ".NET", href: "https://dotnet.microsoft.com" },
-  { node: <TbBrandCSharp size={36} color="#239120" />, title: "C#", href: "https://learn.microsoft.com/en-us/dotnet/csharp/" },
-  { node: <SiPhp size={36} color="#777BB4" />, title: "PHP", href: "https://www.php.net" },
-  { node: <SiLaravel size={36} color="#FF2D20" />, title: "Laravel", href: "https://laravel.com" },
-  { node: <SiTailwindcss size={36} color="#06B6D4" />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  {
+    node: <SiReact size={36} color="#61DBFB" />,
+    title: "React",
+    href: "https://react.dev",
+  },
+  {
+    node: <SiNextdotjs size={36} color="#ffffff" />,
+    title: "Next.js",
+    href: "https://nextjs.org",
+  },
+  {
+    node: <SiJavascript size={36} color="#F7DF1E" />,
+    title: "JavaScript",
+    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+  },
+  {
+    node: <SiTypescript size={36} color="#3178C6" />,
+    title: "TypeScript",
+    href: "https://www.typescriptlang.org",
+  },
+  {
+    node: <SiPostgresql size={36} color="#4169E1" />,
+    title: "PostgreSQL",
+    href: "https://www.postgresql.org",
+  },
+  {
+    node: <SiMongodb size={36} color="#47A248" />,
+    title: "MongoDB",
+    href: "https://www.mongodb.com",
+  },
+  {
+    node: <SiNodedotjs size={36} color="#5FA04E" />,
+    title: "Node.js",
+    href: "https://nodejs.org",
+  },
+  {
+    node: <SiDotnet size={36} color="#512BD4" />,
+    title: ".NET",
+    href: "https://dotnet.microsoft.com",
+  },
+  {
+    node: <TbBrandCSharp size={36} color="#239120" />,
+    title: "C#",
+    href: "https://learn.microsoft.com/en-us/dotnet/csharp/",
+  },
+  {
+    node: <SiPhp size={36} color="#777BB4" />,
+    title: "PHP",
+    href: "https://www.php.net",
+  },
+  {
+    node: <SiLaravel size={36} color="#FF2D20" />,
+    title: "Laravel",
+    href: "https://laravel.com",
+  },
+  {
+    node: <SiTailwindcss size={36} color="#06B6D4" />,
+    title: "Tailwind CSS",
+    href: "https://tailwindcss.com",
+  },
 ];
 
-const SectionFallback = () => (
-  <div className="min-h-[200px] bg-black" />
-);
+const SectionFallback = () => <div className="min-h-[200px] bg-black" />;
 
 const App = () => {
   return (
